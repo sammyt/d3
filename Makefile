@@ -3,6 +3,7 @@ LOCALE ?= en_US
 GENERATED_FILES = \
 	d3.js \
 	d3.min.js \
+	d3-node.js \
 	component.json
 
 all: $(GENERATED_FILES)
@@ -27,6 +28,11 @@ src/start.js: package.json bin/start
 d3.js: $(shell node_modules/.bin/smash --list src/d3.js) package.json
 	@rm -f $@
 	node_modules/.bin/smash src/d3.js | node_modules/.bin/uglifyjs - -b indent-level=2 -o $@
+	@chmod a-w $@
+
+d3-node.js: $(shell node_modules/.bin/smash --list src/node/d3.js) package.json
+	@rm -f $@
+	node_modules/.bin/smash src/node/d3.js | node_modules/.bin/uglifyjs - -b indent-level=2 -o $@
 	@chmod a-w $@
 
 d3.min.js: d3.js

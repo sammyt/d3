@@ -6,7 +6,7 @@ globals.forEach(function(g) {
 });
 
 require("./globals");
-require("./d3");
+require("./d3-node");
 
 module.exports = d3;
 
